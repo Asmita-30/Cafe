@@ -6,7 +6,9 @@ import homepage2Img from '../assets/homepage2.png';
 import aboutImg from '../assets/about.png';
 import coffieserveImg from '../assets/coffieserve.png';
 import cafebillImg from '../assets/cafebill.png';
-import homepageBg from '../assets/homepage.png'; // Background image for stats
+import homepageBg from '../assets/homepage.png';
+import testimonialBg from '../assets/homepage2.png';
+import featuresBg from '../assets/coffieserve.png';
 
 // Import menu card images
 import Espresso from '../assets/menucard/Espresso cofee.png';
@@ -19,6 +21,19 @@ import IcedLatte from '../assets/menucard/Iced Latte.png';
 import ChocolateMuffin from '../assets/menucard/Chocolate Muffin.png';
 import GrilledCheese from '../assets/menucard/Grilled Cheese.png';
 import Cheesecake from '../assets/menucard/Cheesecake.png';
+
+// Import moving category images
+import BakeryImg from '../assets/menu/Bakery.png';
+import BreakfastImg from '../assets/menu/Breakfast.png';
+import ColdCoffeeImg from '../assets/menu/coldcoffie.png';
+import DessertsImg from '../assets/menu/Desserts.png';
+import HotCoffeeImg from '../assets/menu/hotcoffie.png';
+import LunchDinnerImg from '../assets/menu/Lunch & Dinner.png';
+import SaladsImg from '../assets/menu/Salads.png';
+import SandwichesImg from '../assets/menu/Sandwiches.png';
+import SignatureDrinksImg from '../assets/menu/Signature Drinks.png';
+import SmoothiesImg from '../assets/menu/Smoothies.png';
+import TeaImg from '../assets/menu/Tea.png';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,23 +74,28 @@ const Home = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const popularItems = [
-    { id: 1, name: 'Espresso', price: '₹180', icon: '☕', image: Espresso, category: 'Coffee', delay: 0 },
-    { id: 2, name: 'Caffè Latte', price: '₹220', icon: '☕', image: CaffeLatte, category: 'Coffee', delay: 0.1 },
-    { id: 3, name: 'Cappuccino', price: '₹220', icon: '☕', image: Cappuccino, category: 'Coffee', delay: 0.2 },
-    { id: 4, name: 'Masala Chai', price: '₹150', icon: '🍵', image: MasalaChai, category: 'Tea', delay: 0.3 },
-    { id: 5, name: 'Iced Latte', price: '₹240', icon: '🧊', image: IcedLatte, category: 'Cold Coffee', delay: 0.4 },
-    { id: 6, name: 'Chocolate Cake', price: '₹180', icon: '🍰', image: ChocolateCake, category: 'Dessert', delay: 0.5 },
-    { id: 7, name: 'Veg Burger', price: '₹280', icon: '🍔', image: VegBurger, category: 'Lunch', delay: 0.6 },
-    { id: 8, name: 'Chocolate Muffin', price: '₹110', icon: '🧁', image: ChocolateMuffin, category: 'Bakery', delay: 0.7 },
-    { id: 9, name: 'Grilled Cheese', price: '₹180', icon: '🥪', image: GrilledCheese, category: 'Sandwich', delay: 0.8 },
-    { id: 10, name: 'Cheesecake', price: '₹200', icon: '🍰', image: Cheesecake, category: 'Dessert', delay: 0.9 }
+    { id: 1, name: 'Espresso', price: '₹180', icon: '☕', image: Espresso, category: 'Coffee', rating: 4.8, orders: '1.2k+' },
+    { id: 2, name: 'Caffè Latte', price: '₹220', icon: '☕', image: CaffeLatte, category: 'Coffee', rating: 4.9, orders: '2.5k+' },
+    { id: 3, name: 'Cappuccino', price: '₹220', icon: '☕', image: Cappuccino, category: 'Coffee', rating: 4.7, orders: '1.8k+' },
+    { id: 4, name: 'Masala Chai', price: '₹150', icon: '🍵', image: MasalaChai, category: 'Tea', rating: 4.9, orders: '3.1k+' },
+    { id: 5, name: 'Iced Latte', price: '₹240', icon: '🧊', image: IcedLatte, category: 'Cold Coffee', rating: 4.8, orders: '1.5k+' },
+    { id: 6, name: 'Chocolate Cake', price: '₹180', icon: '🍰', image: ChocolateCake, category: 'Dessert', rating: 4.9, orders: '2.2k+' },
+    { id: 7, name: 'Veg Burger', price: '₹280', icon: '🍔', image: VegBurger, category: 'Lunch', rating: 4.7, orders: '1.9k+' },
+    { id: 8, name: 'Chocolate Muffin', price: '₹110', icon: '🧁', image: ChocolateMuffin, category: 'Bakery', rating: 4.8, orders: '3.5k+' },
+    { id: 9, name: 'Grilled Cheese', price: '₹180', icon: '🥪', image: GrilledCheese, category: 'Sandwich', rating: 4.6, orders: '1.1k+' },
+    { id: 10, name: 'Cheesecake', price: '₹200', icon: '🍰', image: Cheesecake, category: 'Dessert', rating: 4.9, orders: '2.8k+' }
   ];
 
+  // Enhanced Features data with more details
   const features = [
-    { icon: "☕", title: "Premium Coffee", desc: "100% Arabica beans from finest estates" },
-    { icon: "🍰", title: "Fresh Bakery", desc: "Baked daily with love and care" },
-    { icon: "🏠", title: "Cozy Ambiance", desc: "Perfect for work, meetings & relaxation" },
-    { icon: "🚚", title: "Free Delivery", desc: "On orders above ₹500 within 5km" }
+    { id: 1, icon: "☕", title: "Premium Coffee", desc: "100% Arabica beans from finest estates", color: "#f59e0b", gradient: "linear-gradient(135deg, #f59e0b, #fbbf24)", delay: 0 },
+    { id: 2, icon: "🍰", title: "Fresh Bakery", desc: "Baked daily with love and care", color: "#e74c3c", gradient: "linear-gradient(135deg, #e74c3c, #f39c12)", delay: 0.1 },
+    { id: 3, icon: "🏠", title: "Cozy Ambiance", desc: "Perfect for work, meetings & relaxation", color: "#3498db", gradient: "linear-gradient(135deg, #3498db, #2ecc71)", delay: 0.2 },
+    { id: 4, icon: "🚚", title: "Free Delivery", desc: "On orders above ₹500 within 5km", color: "#2ecc71", gradient: "linear-gradient(135deg, #2ecc71, #27ae60)", delay: 0.3 },
+    { id: 5, icon: "👨‍🍳", title: "Expert Baristas", desc: "10+ years of coffee expertise", color: "#9b59b6", gradient: "linear-gradient(135deg, #9b59b6, #8e44ad)", delay: 0.4 },
+    { id: 6, icon: "🌱", title: "Sustainable Sourcing", desc: "Eco-friendly coffee beans", color: "#27ae60", gradient: "linear-gradient(135deg, #27ae60, #2ecc71)", delay: 0.5 },
+    { id: 7, icon: "🎵", title: "Live Music", desc: "Weekend acoustic sessions", color: "#e67e22", gradient: "linear-gradient(135deg, #e67e22, #f39c12)", delay: 0.6 },
+    { id: 8, icon: "📚", title: "Work Friendly", desc: "Free WiFi & power outlets", color: "#1abc9c", gradient: "linear-gradient(135deg, #1abc9c, #16a085)", delay: 0.7 }
   ];
 
   const stats = [
@@ -85,14 +105,34 @@ const Home = () => {
     { number: "25+", label: "Expert Baristas", icon: "👨‍🍳" }
   ];
 
+  const movingCategories = [
+    { id: 1, name: 'Hot Coffee', image: HotCoffeeImg },
+    { id: 2, name: 'Cold Coffee', image: ColdCoffeeImg },
+    { id: 3, name: 'Tea', image: TeaImg },
+    { id: 4, name: 'Signature Drinks', image: SignatureDrinksImg },
+    { id: 5, name: 'Smoothies', image: SmoothiesImg },
+    { id: 6, name: 'Breakfast', image: BreakfastImg },
+    { id: 7, name: 'Lunch & Dinner', image: LunchDinnerImg },
+    { id: 8, name: 'Sandwiches', image: SandwichesImg },
+    { id: 9, name: 'Salads', image: SaladsImg },
+    { id: 10, name: 'Bakery', image: BakeryImg },
+    { id: 11, name: 'Desserts', image: DessertsImg }
+  ];
+
+  const testimonials = [
+    { id: 1, name: "Priya Sharma", role: "Regular Customer", text: "The best coffee in town! The ambiance is amazing and the staff is super friendly. Love their cold coffee and cheesecake!", rating: 5, image: "👩‍💼", date: "2 days ago" },
+    { id: 2, name: "Rahul Verma", role: "Food Blogger", text: "Café Aura has the most delicious menu. Their signature drinks are a must-try! Highly recommended for coffee lovers.", rating: 5, image: "👨‍💻", date: "5 days ago" },
+    { id: 3, name: "Neha Gupta", role: "Yoga Instructor", text: "Perfect place for a quiet coffee date or work from café. The veg burger and iced latte are my favorites!", rating: 5, image: "🧘‍♀️", date: "1 week ago" },
+    { id: 4, name: "Amit Patel", role: "IT Professional", text: "Great place to relax after work. The Masala Chai and Chocolate Muffin are absolutely delicious. Keep up the good work!", rating: 5, image: "👨‍💼", date: "3 days ago" },
+    { id: 5, name: "Sneha Reddy", role: "College Student", text: "Love the cozy vibe and the affordable prices. The cappuccino and chocolate cake are my go-to orders!", rating: 5, image: "👩‍🎓", date: "1 day ago" },
+    { id: 6, name: "Vikram Singh", role: "Entrepreneur", text: "Excellent service and even better coffee. The free delivery is a game-changer. My morning coffee ritual is sorted!", rating: 5, image: "👨‍💼", date: "4 days ago" }
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 }
     }
   };
 
@@ -113,9 +153,26 @@ const Home = () => {
       transition: { type: "spring", stiffness: 200, damping: 20 }
     },
     hover: {
+      y: -20,
+      scale: 1.05,
+      boxShadow: "0 30px 60px rgba(245,158,11,0.3)",
+      transition: { type: "spring", stiffness: 300 }
+    }
+  };
+
+  const featureCardVariants = {
+    hidden: { scale: 0.9, opacity: 0, y: 30, rotateY: -10 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      transition: { type: "spring", stiffness: 150, damping: 15 }
+    },
+    hover: {
       y: -15,
-      scale: 1.02,
-      boxShadow: "0 25px 50px rgba(0,0,0,0.2)",
+      scale: 1.05,
+      rotateY: 5,
       transition: { type: "spring", stiffness: 300 }
     }
   };
@@ -255,25 +312,141 @@ const Home = () => {
       marginBottom: '20px',
       fontSize: '16px',
     },
+    
+    movingSection: {
+      padding: '80px 20px',
+      background: 'linear-gradient(135deg, #fefaf5 0%, #fff 100%)',
+      overflow: 'hidden',
+    },
+    movingContainer: {
+      maxWidth: '1400px',
+      margin: '0 auto',
+    },
+    movingTrack: {
+      display: 'flex',
+      gap: '25px',
+      animation: 'scroll 40s linear infinite',
+      width: 'max-content',
+    },
+    movingItem: {
+      flex: '0 0 auto',
+      width: '200px',
+      textAlign: 'center',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+    },
+    movingImageWrapper: {
+      width: '160px',
+      height: '160px',
+      margin: '0 auto 15px',
+      borderRadius: '50%',
+      overflow: 'hidden',
+      boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
+      border: '4px solid #f59e0b',
+      transition: 'all 0.3s ease',
+    },
+    movingImage: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      transition: 'transform 0.5s ease',
+    },
+    movingName: {
+      fontSize: '16px',
+      fontWeight: 'bold',
+      color: '#78350f',
+    },
+    
+    // Enhanced Features Section
+    featuresSection: {
+      position: 'relative',
+      padding: '100px 20px',
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${featuresBg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      overflow: 'hidden',
+    },
+    featuresContainer: {
+      maxWidth: '1300px',
+      margin: '0 auto',
+      position: 'relative',
+      zIndex: 2,
+    },
     featuresGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(2, 1fr)',
-      gap: '20px',
-      marginTop: '35px',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+      gap: '35px',
+      marginTop: '60px',
     },
     featureCard: {
-      padding: '20px',
-      background: 'white',
-      borderRadius: '20px',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+      background: 'rgba(255,255,255,0.95)',
+      backdropFilter: 'blur(10px)',
+      borderRadius: '30px',
+      padding: '35px 25px',
       textAlign: 'center',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      border: '2px solid rgba(245,158,11,0.3)',
+      position: 'relative',
+      overflow: 'hidden',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
     },
-    featureIcon: { fontSize: '40px', marginBottom: '12px' },
-    featureTitle: { fontSize: '18px', fontWeight: 'bold', color: '#78350f', marginBottom: '8px' },
-    featureDesc: { fontSize: '13px', color: '#6b7280' },
+    featureCardGlow: {
+      position: 'absolute',
+      top: '-50%',
+      left: '-50%',
+      width: '200%',
+      height: '200%',
+      background: 'radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%)',
+      opacity: 0,
+      transition: 'opacity 0.5s ease',
+      pointerEvents: 'none',
+    },
+    featureIconWrapper: {
+      width: '90px',
+      height: '90px',
+      background: 'linear-gradient(135deg, #fef3c7, #f59e0b)',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: '0 auto 25px',
+      fontSize: '48px',
+      boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
+      transition: 'all 0.3s ease',
+      position: 'relative',
+      zIndex: 2,
+    },
+    featureTitle: {
+      fontSize: '22px',
+      fontWeight: 'bold',
+      color: '#78350f',
+      marginBottom: '12px',
+      position: 'relative',
+      zIndex: 2,
+    },
+    featureDesc: {
+      fontSize: '14px',
+      color: '#6b7280',
+      lineHeight: '1.6',
+      position: 'relative',
+      zIndex: 2,
+    },
+    featureNumber: {
+      position: 'absolute',
+      bottom: '15px',
+      right: '20px',
+      fontSize: '50px',
+      fontWeight: 'bold',
+      color: 'rgba(245,158,11,0.1)',
+      fontFamily: 'monospace',
+      zIndex: 1,
+    },
+    
     menuSection: {
       padding: '100px 20px',
-      background: 'white',
+      background: 'linear-gradient(135deg, #fff 0%, #fef3c7 50%, #fff 100%)',
     },
     sectionHeader: { textAlign: 'center', marginBottom: '60px' },
     sectionTitle: {
@@ -285,36 +458,64 @@ const Home = () => {
     sectionSubtitle: { fontSize: '18px', color: '#6b7280' },
     menuGrid: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-      gap: '35px',
-      maxWidth: '1200px',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+      gap: '40px',
+      maxWidth: '1300px',
       margin: '0 auto',
     },
     menuCard: {
-      background: '#fefaf5',
-      borderRadius: '25px',
+      background: 'white',
+      borderRadius: '30px',
       overflow: 'hidden',
       cursor: 'pointer',
       position: 'relative',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+      border: '1px solid rgba(245,158,11,0.2)',
     },
-    menuImageWrapper: { width: '100%', height: '220px', overflow: 'hidden', background: '#fff' },
-    menuImage: { width: '100%', height: '100%', objectFit: 'contain', transition: 'transform 0.5s ease' },
+    menuImageWrapper: { width: '100%', height: '240px', overflow: 'hidden', background: 'linear-gradient(135deg, #fefaf5, #fff)', position: 'relative' },
+    menuImage: { width: '100%', height: '100%', objectFit: 'contain', transition: 'transform 0.5s ease', padding: '15px' },
+    ratingBadge: {
+      position: 'absolute',
+      top: '15px',
+      right: '15px',
+      background: '#f59e0b',
+      color: 'white',
+      padding: '5px 12px',
+      borderRadius: '20px',
+      fontSize: '12px',
+      fontWeight: 'bold',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '5px',
+    },
+    ordersBadge: {
+      position: 'absolute',
+      bottom: '15px',
+      left: '15px',
+      background: 'rgba(0,0,0,0.7)',
+      color: 'white',
+      padding: '4px 10px',
+      borderRadius: '20px',
+      fontSize: '11px',
+      fontWeight: 'bold',
+    },
     menuContent: { padding: '22px' },
     menuHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' },
     menuIcon: { fontSize: '28px' },
-    menuName: { fontSize: '18px', fontWeight: 'bold', color: '#78350f', flex: 1, marginLeft: '10px' },
-    menuPrice: { fontSize: '20px', fontWeight: 'bold', color: '#f59e0b' },
-    menuCategory: { fontSize: '12px', color: '#9ca3af', marginBottom: '12px' },
+    menuName: { fontSize: '20px', fontWeight: 'bold', color: '#78350f', flex: 1, marginLeft: '10px' },
+    menuPrice: { fontSize: '22px', fontWeight: 'bold', color: '#f59e0b' },
+    menuCategory: { fontSize: '13px', color: '#9ca3af', marginBottom: '15px', display: 'inline-block', background: '#fef3c7', padding: '4px 12px', borderRadius: '20px' },
     orderBtn: {
       width: '100%',
-      padding: '10px',
-      background: '#fef3c7',
+      padding: '12px',
+      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
       border: 'none',
       borderRadius: '15px',
-      color: '#78350f',
+      color: 'white',
       fontWeight: '600',
       cursor: 'pointer',
       transition: 'all 0.3s ease',
+      fontSize: '16px',
     },
     viewAllBtn: { textAlign: 'center', marginTop: '60px' },
     viewAllButton: {
@@ -327,7 +528,6 @@ const Home = () => {
       fontWeight: 'bold',
       cursor: 'pointer',
     },
-    // Stats Section with Background Image
     statsSection: {
       position: 'relative',
       padding: '100px 20px',
@@ -358,30 +558,168 @@ const Home = () => {
     statIcon: { fontSize: '50px', marginBottom: '15px' },
     statNumber: { fontSize: '44px', fontWeight: 'bold', marginBottom: '8px', color: '#f59e0b' },
     statLabel: { fontSize: '14px', opacity: 0.95, color: 'white' },
+    
+    testimonialsSection: {
+      position: 'relative',
+      padding: '100px 20px',
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(${testimonialBg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+      overflow: 'hidden',
+    },
+    testimonialsContainer: {
+      maxWidth: '1400px',
+      margin: '0 auto',
+      position: 'relative',
+      zIndex: 2,
+    },
+    testimonialsTrack: {
+      display: 'flex',
+      gap: '30px',
+      animation: 'scrollReverse 35s linear infinite',
+      width: 'max-content',
+    },
+    testimonialCard: {
+      flex: '0 0 auto',
+      width: '380px',
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,245,235,0.95))',
+      backdropFilter: 'blur(10px)',
+      borderRadius: '30px',
+      padding: '30px',
+      boxShadow: '0 30px 50px rgba(0,0,0,0.3)',
+      textAlign: 'center',
+      transition: 'all 0.3s ease',
+      border: '1px solid rgba(245,158,11,0.5)',
+      position: 'relative',
+    },
+    testimonialQuote: {
+      position: 'absolute',
+      top: '20px',
+      left: '25px',
+      fontSize: '70px',
+      color: '#f59e0b',
+      opacity: 0.4,
+      fontFamily: 'serif',
+    },
+    testimonialImage: {
+      fontSize: '70px',
+      marginBottom: '15px',
+      background: 'linear-gradient(135deg, #fef3c7, #f59e0b)',
+      width: '85px',
+      height: '85px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: '0 auto 20px',
+      border: '3px solid #f59e0b',
+      boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+    },
+    testimonialName: {
+      fontSize: '22px',
+      fontWeight: 'bold',
+      color: '#78350f',
+      marginBottom: '5px',
+    },
+    testimonialRole: {
+      fontSize: '13px',
+      color: '#f59e0b',
+      marginBottom: '15px',
+      fontWeight: '600',
+      textTransform: 'uppercase',
+      letterSpacing: '1px',
+    },
+    testimonialText: {
+      fontSize: '15px',
+      color: '#4b5563',
+      lineHeight: '1.7',
+      marginBottom: '15px',
+      fontStyle: 'italic',
+    },
+    testimonialRating: {
+      color: '#f59e0b',
+      fontSize: '18px',
+      letterSpacing: '2px',
+      marginBottom: '10px',
+    },
+    testimonialDate: {
+      fontSize: '11px',
+      color: '#9ca3af',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '5px',
+    },
+    
     specialSection: {
       padding: '100px 20px',
-      background: 'linear-gradient(135deg, #fef3c7, #fff)',
+      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+      position: 'relative',
+      overflow: 'hidden',
     },
     specialContainer: {
-      maxWidth: '1100px',
+      maxWidth: '1200px',
       margin: '0 auto',
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gap: '60px',
       alignItems: 'center',
+      position: 'relative',
+      zIndex: 2,
     },
-    specialImage: { width: '100%', borderRadius: '30px', boxShadow: '0 25px 50px rgba(0,0,0,0.15)' },
-    specialTitle: { fontSize: '38px', color: '#78350f', marginBottom: '15px', fontWeight: 'bold' },
-    specialPrice: { fontSize: '42px', color: '#f59e0b', fontWeight: 'bold', marginBottom: '25px' },
+    specialImage: { 
+      width: '100%', 
+      borderRadius: '30px', 
+      boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
+      border: '3px solid #f59e0b',
+    },
+    specialTitle: { 
+      fontSize: '48px', 
+      color: '#f59e0b', 
+      marginBottom: '20px', 
+      fontWeight: 'bold',
+      textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+    },
+    specialPrice: { 
+      fontSize: '52px', 
+      color: '#fff', 
+      fontWeight: 'bold', 
+      marginBottom: '25px',
+      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+      display: 'inline-block',
+      padding: '10px 30px',
+      borderRadius: '50px',
+      boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+    },
+    specialDesc: {
+      color: '#e2e8f0',
+      fontSize: '18px',
+      marginBottom: '30px',
+      lineHeight: '1.6',
+    },
     specialBtn: {
-      padding: '14px 40px',
+      padding: '16px 50px',
       background: 'linear-gradient(135deg, #f59e0b, #d97706)',
       color: 'white',
       border: 'none',
       borderRadius: '50px',
-      fontSize: '16px',
+      fontSize: '18px',
       fontWeight: 'bold',
       cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 10px 20px rgba(0,0,0,0.2)',
+    },
+    specialBadge: {
+      position: 'absolute',
+      top: '20px',
+      right: '-30px',
+      background: '#f59e0b',
+      color: '#fff',
+      padding: '8px 40px',
+      transform: 'rotate(45deg)',
+      fontSize: '14px',
+      fontWeight: 'bold',
     },
   };
 
@@ -476,25 +814,100 @@ const Home = () => {
               crafts each beverage with precision and love, while our kitchen serves up 
               mouthwatering dishes made from locally sourced ingredients.
             </p>
-            <div style={styles.featuresGrid}>
-              {features.map((feature, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  style={styles.featureCard}
-                >
-                  <div style={styles.featureIcon}>{feature.icon}</div>
-                  <div style={styles.featureTitle}>{feature.title}</div>
-                  <div style={styles.featureDesc}>{feature.desc}</div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Menu Section */}
+      {/* Moving Categories Section */}
+      <div style={styles.movingSection}>
+        <div style={styles.sectionHeader}>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={styles.sectionTitle}
+          >
+            🍽️ Explore Our Menu Categories 🍽️
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            style={styles.sectionSubtitle}
+          >
+            Something delicious for every craving
+          </motion.p>
+        </div>
+        
+        <div style={styles.movingContainer}>
+          <div style={styles.movingTrack} className="moving-track">
+            {[...movingCategories, ...movingCategories].map((item, idx) => (
+              <motion.div
+                key={`${item.id}-${idx}`}
+                whileHover={{ y: -10, scale: 1.05 }}
+                style={styles.movingItem}
+                onClick={() => window.location.href = '/menu'}
+              >
+                <div style={styles.movingImageWrapper}>
+                  <img src={item.image} alt={item.name} style={styles.movingImage} />
+                </div>
+                <div style={styles.movingName}>{item.name}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Enhanced Features Section with Attractive Cards */}
+      <div style={styles.featuresSection}>
+        <div style={styles.featuresContainer}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            style={styles.sectionHeader}
+          >
+            <h2 style={{...styles.sectionTitle, color: '#fef3c7', textShadow: '2px 2px 4px rgba(0,0,0,0.5)'}}>
+              🌟 Why Choose Café Aura? 🌟
+            </h2>
+            <p style={{...styles.sectionSubtitle, color: '#fef3c7', textShadow: '1px 1px 2px rgba(0,0,0,0.3)'}}>
+              Experience the difference that makes us special
+            </p>
+          </motion.div>
+
+          <div style={styles.featuresGrid}>
+            {features.map((feature, idx) => (
+              <motion.div
+                key={feature.id}
+                variants={featureCardVariants}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, amount: 0.2 }}
+                style={styles.featureCard}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.border = `2px solid ${feature.color}`;
+                  e.currentTarget.style.boxShadow = `0 25px 50px ${feature.color}40`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.border = '2px solid rgba(245,158,11,0.3)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
+                }}
+              >
+                <div style={styles.featureCardGlow} />
+                <div style={{...styles.featureIconWrapper, background: feature.gradient, boxShadow: `0 15px 30px ${feature.color}60`}}>
+                  {feature.icon}
+                </div>
+                <h3 style={styles.featureTitle}>{feature.title}</h3>
+                <p style={styles.featureDesc}>{feature.desc}</p>
+                <div style={styles.featureNumber}>{(idx + 1).toString().padStart(2, '0')}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Popular Menu Section */}
       <div style={styles.menuSection}>
         <div style={styles.sectionHeader}>
           <motion.h2
@@ -529,6 +942,8 @@ const Home = () => {
             >
               <div style={styles.menuImageWrapper}>
                 <img src={item.image} alt={item.name} style={styles.menuImage} className="menu-img" />
+                <div style={styles.ratingBadge}>⭐ {item.rating}</div>
+                <div style={styles.ordersBadge}>🛒 {item.orders} orders</div>
               </div>
               <div style={styles.menuContent}>
                 <div style={styles.menuHeader}>
@@ -538,7 +953,7 @@ const Home = () => {
                 </div>
                 <div style={styles.menuCategory}>{item.category}</div>
                 <motion.button
-                  whileHover={{ scale: 1.02, background: '#f59e0b', color: 'white' }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 5px 15px rgba(245,158,11,0.4)" }}
                   style={styles.orderBtn}
                   onClick={(e) => { e.stopPropagation(); window.location.href = '/order'; }}
                 >
@@ -561,7 +976,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Stats Section with Background Image */}
+      {/* Stats Section */}
       <div style={styles.statsSection}>
         <div style={styles.statsContainer}>
           {stats.map((stat, idx) => (
@@ -581,26 +996,70 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Testimonials Section */}
+      <div style={styles.testimonialsSection}>
+        <div style={styles.testimonialsContainer}>
+          <div style={styles.sectionHeader}>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              style={{...styles.sectionTitle, color: '#fef3c7', textShadow: '2px 2px 4px rgba(0,0,0,0.5)'}}
+            >
+              ⭐ What Our Customers Say ⭐
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              style={{...styles.sectionSubtitle, color: '#fef3c7', textShadow: '1px 1px 2px rgba(0,0,0,0.3)'}}
+            >
+              Loved by thousands of coffee enthusiasts
+            </motion.p>
+          </div>
+          
+          <div style={styles.testimonialsTrack} className="testimonials-track">
+            {[...testimonials, ...testimonials].map((testimonial, idx) => (
+              <motion.div
+                key={`${testimonial.id}-${idx}`}
+                whileHover={{ y: -15, scale: 1.03, boxShadow: "0 35px 60px rgba(0,0,0,0.4)" }}
+                style={styles.testimonialCard}
+              >
+                <div style={styles.testimonialQuote}>"</div>
+                <div style={styles.testimonialImage}>{testimonial.image}</div>
+                <div style={styles.testimonialName}>{testimonial.name}</div>
+                <div style={styles.testimonialRole}>{testimonial.role}</div>
+                <div style={styles.testimonialText}>"{testimonial.text}"</div>
+                <div style={styles.testimonialRating}>{"★".repeat(testimonial.rating)}</div>
+                <div style={styles.testimonialDate}>📅 {testimonial.date}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Special Offer Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        style={styles.specialSection}
-      >
+      <div style={styles.specialSection}>
+        <div style={styles.specialBadge}>🔥 LIMITED OFFER 🔥</div>
         <div style={styles.specialContainer}>
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 style={styles.specialTitle}>Special Combo Offer 🎉</h2>
-            <p style={{ color: '#4b5563', marginBottom: '15px', fontSize: '16px' }}>
-              Get our signature coffee with a freshly baked croissant at an unbeatable price!
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <div style={styles.specialTitle}>🎉 Special Combo Offer 🎉</div>
+            </motion.div>
+            <p style={styles.specialDesc}>
+              Get our signature coffee with a freshly baked croissant at an unbeatable price! 
+              <br />✨ Perfect start to your morning ✨
             </p>
             <div style={styles.specialPrice}>Only ₹299</div>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
               whileTap={{ scale: 0.95 }}
               style={styles.specialBtn}
               onClick={() => window.location.href = '/order'}
@@ -609,14 +1068,15 @@ const Home = () => {
             </motion.button>
           </motion.div>
           <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ x: 50, opacity: 0, rotate: -5 }}
+            whileInView={{ x: 0, opacity: 1, rotate: 0 }}
             transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.02, rotate: 2 }}
           >
             <img src={cafebillImg} alt="Special Offer" style={styles.specialImage} />
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       <style>
         {`
@@ -624,18 +1084,50 @@ const Home = () => {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
           }
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          @keyframes scrollReverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+          }
+          .moving-track {
+            animation: scroll 40s linear infinite;
+          }
+          .moving-track:hover {
+            animation-play-state: paused;
+          }
+          .testimonials-track {
+            animation: scrollReverse 35s linear infinite;
+          }
+          .testimonials-track:hover {
+            animation-play-state: paused;
+          }
+          .menu-img:hover {
+            transform: scale(1.08);
+          }
           @media (max-width: 768px) {
             .menuGrid { grid-template-columns: 1fr !important; }
-            .aboutContainer, .specialContainer { grid-template-columns: 1fr !important; }
+            .aboutContainer, .specialContainer { grid-template-columns: 1fr !important; text-align: center; }
             .statsContainer { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+            .featuresGrid { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; }
             .slideTitle { font-size: 36px !important; }
             .slideSubtitle { font-size: 20px !important; }
             .sectionTitle { font-size: 32px !important; }
             .aboutTitle { font-size: 32px !important; }
-            .specialTitle { font-size: 28px !important; }
-            .specialPrice { font-size: 32px !important; }
+            .specialTitle { font-size: 32px !important; }
+            .specialPrice { font-size: 36px !important; }
             .statNumber { font-size: 32px !important; }
             .statIcon { font-size: 36px !important; }
+            .movingItem { width: 140px !important; }
+            .movingImageWrapper { width: 110px !important; height: 110px !important; }
+            .testimonialCard { width: 300px !important; padding: 25px !important; }
+            .testimonialImage { width: 65px !important; height: 65px !important; font-size: 50px !important; }
+            .featureCard { padding: 25px 15px !important; }
+            .featureIconWrapper { width: 70px !important; height: 70px !important; font-size: 38px !important; margin-bottom: 15px !important; }
+            .featureTitle { font-size: 18px !important; }
+            .featureDesc { font-size: 12px !important; }
           }
         `}
       </style>
