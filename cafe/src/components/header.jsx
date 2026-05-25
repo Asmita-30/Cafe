@@ -41,7 +41,13 @@ const Header = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMenuDropdownOpen]);
 
-  // Navigation function
+  // Navigation function with filter support
+  const navigateToMenuWithFilter = (filterId) => {
+    // Store filter in localStorage to apply on menu page
+    localStorage.setItem('menuFilter', filterId);
+    window.location.href = '/menu';
+  };
+
   const navigateTo = (path) => {
     window.location.href = path;
   };
@@ -55,17 +61,18 @@ const Header = () => {
       icon: '🍽️',
       hasDropdown: true,
       dropdownItems: [
-        { name: 'Hot Coffees', href: '/menu/hot-coffee', icon: '☕', desc: 'Espresso, Latte, Cappuccino' },
-        { name: 'Cold Coffees', href: '/menu/cold-coffee', icon: '🧊', desc: 'Iced Coffee, Frappé' },
-        { name: 'Teas & Chai', href: '/menu/tea', icon: '🍵', desc: 'Green Tea, Masala Chai' },
-        { name: 'Fresh Bakery', href: '/menu/bakery', icon: '🥐', desc: 'Croissants, Muffins, Cookies' },
-        { name: 'Breakfast', href: '/menu/breakfast', icon: '🍳', desc: 'Eggs, Pancakes, Omelettes' },
-        { name: 'Lunch & Dinner', href: '/menu/lunch', icon: '🍝', desc: 'Pasta, Burgers, Pizza' },
-        { name: 'Desserts', href: '/menu/desserts', icon: '🍰', desc: 'Cakes, Pastries, Ice Cream' },
-        { name: 'Smoothies', href: '/menu/smoothies', icon: '🥤', desc: 'Fruit & Protein Smoothies' },
-        { name: 'Signature Drinks', href: '/menu/signature', icon: '✨', desc: 'Chef Special Beverages' },
-        { name: 'Sandwiches', href: '/menu/sandwiches', icon: '🥪', desc: 'Grilled & Cold Sandwiches' },
-        { name: 'Salads', href: '/menu/salads', icon: '🥗', desc: 'Fresh & Healthy Bowls' }
+        { name: 'All Items', filterId: 'all', icon: '🍽️', desc: 'View complete menu' },
+        { name: 'Hot Coffees', filterId: 'coffee', icon: '☕', desc: 'Espresso, Latte, Cappuccino' },
+        { name: 'Cold Coffees', filterId: 'cold', icon: '🧊', desc: 'Iced Coffee, Frappé' },
+        { name: 'Teas & Chai', filterId: 'tea', icon: '🍵', desc: 'Green Tea, Masala Chai' },
+        { name: 'Fresh Bakery', filterId: 'bakery', icon: '🥐', desc: 'Croissants, Muffins, Cookies' },
+        { name: 'Breakfast', filterId: 'breakfast', icon: '🍳', desc: 'Eggs, Pancakes, Omelettes' },
+        { name: 'Lunch & Dinner', filterId: 'lunch', icon: '🍝', desc: 'Pasta, Burgers, Pizza' },
+        { name: 'Desserts', filterId: 'desserts', icon: '🍰', desc: 'Cakes, Pastries, Ice Cream' },
+        { name: 'Smoothies', filterId: 'smoothies', icon: '🥤', desc: 'Fruit & Protein Smoothies' },
+        { name: 'Signature Drinks', filterId: 'signature', icon: '✨', desc: 'Chef Special Beverages' },
+        { name: 'Sandwiches', filterId: 'sandwiches', icon: '🥪', desc: 'Grilled & Cold Sandwiches' },
+        { name: 'Salads', filterId: 'salads', icon: '🥗', desc: 'Fresh & Healthy Bowls' }
       ]
     },
     { name: 'Contact', href: '/contact', icon: '📞' }
@@ -156,7 +163,7 @@ const Header = () => {
       position: 'absolute',
       top: '45px',
       left: '-20px',
-      minWidth: '280px',
+      minWidth: '300px',
       background: 'white',
       borderRadius: '16px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
@@ -167,6 +174,8 @@ const Header = () => {
       transform: isMenuDropdownOpen ? 'translateY(0)' : 'translateY(-15px)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '1px solid rgba(180, 83, 9, 0.1)',
+      maxHeight: '500px',
+      overflowY: 'auto',
     },
     dropdownItem: {
       padding: '10px 20px',
@@ -179,6 +188,7 @@ const Header = () => {
       fontSize: '14px',
       fontWeight: '500',
       borderBottom: '1px solid #f5f5f5',
+      cursor: 'pointer',
     },
     dropdownIcon: {
       fontSize: '20px',
@@ -295,6 +305,7 @@ const Header = () => {
       fontSize: '14px',
       fontWeight: '500',
       borderBottom: '1px solid #f0f0f0',
+      cursor: 'pointer',
     },
     mobileOrderButton: {
       width: '100%',
@@ -313,6 +324,19 @@ const Header = () => {
       justifyContent: 'center',
       gap: '8px',
     },
+  };
+
+  // Handle dropdown item click with filter
+  const handleDropdownClick = (filterId) => {
+    setIsMenuDropdownOpen(false);
+    navigateToMenuWithFilter(filterId);
+  };
+
+  // Handle mobile dropdown item click
+  const handleMobileDropdownClick = (filterId) => {
+    setIsMobileMenuOpen(false);
+    setIsMobileMenuDropdownOpen(false);
+    navigateToMenuWithFilter(filterId);
   };
 
   return (
@@ -353,10 +377,10 @@ const Header = () => {
                     </button>
                     <div style={styles.dropdownMenu}>
                       {item.dropdownItems.map((subItem) => (
-                        <a
+                        <div
                           key={subItem.name}
-                          href={subItem.href}
                           style={styles.dropdownItem}
+                          onClick={() => handleDropdownClick(subItem.filterId)}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.background = '#fef3c7';
                             e.currentTarget.style.paddingLeft = '25px';
@@ -371,7 +395,7 @@ const Header = () => {
                             <div style={styles.dropdownName}>{subItem.name}</div>
                             <div style={styles.dropdownDesc}>{subItem.desc}</div>
                           </div>
-                        </a>
+                        </div>
                       ))}
                     </div>
                   </>
@@ -438,17 +462,16 @@ const Header = () => {
                 </button>
                 <div style={styles.mobileDropdownItems}>
                   {item.dropdownItems.map((subItem) => (
-                    <a
+                    <div
                       key={subItem.name}
-                      href={subItem.href}
                       style={styles.mobileDropdownItem}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={() => handleMobileDropdownClick(subItem.filterId)}
                       onMouseEnter={(e) => e.currentTarget.style.background = '#fef3c7'}
                       onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                     >
                       <span style={{ fontSize: '18px' }}>{subItem.icon}</span>
                       <span>{subItem.name}</span>
-                    </a>
+                    </div>
                   ))}
                 </div>
               </>
