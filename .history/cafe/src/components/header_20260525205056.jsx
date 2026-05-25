@@ -8,10 +8,12 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
-  const [openServiceCategory, setOpenServiceCategory] = useState(null);
+  const [activeService, setActiveService] = useState(null);
+  const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [isMobileMenuDropdownOpen, setIsMobileMenuDropdownOpen] = useState(false);
   const [isMobileServicesDropdownOpen, setIsMobileServicesDropdownOpen] = useState(false);
-  const [mobileOpenServiceCategory, setMobileOpenServiceCategory] = useState(null);
+  const [mobileActiveService, setMobileActiveService] = useState(null);
+  const [mobileActiveMenuItem, setMobileActiveMenuItem] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,10 +41,11 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (isMenuDropdownOpen && !event.target.closest('.menu-dropdown')) {
         setIsMenuDropdownOpen(false);
+        setActiveMenuItem(null);
       }
       if (isServicesDropdownOpen && !event.target.closest('.services-dropdown')) {
         setIsServicesDropdownOpen(false);
-        setOpenServiceCategory(null);
+        setActiveService(null);
       }
     };
     document.addEventListener('click', handleClickOutside);
@@ -80,7 +83,8 @@ const Header = () => {
       bgColor: '#fce7f3',
       subtypes: [
         { name: 'Private Parties', icon: '🎈', desc: 'Exclusive party arrangements', link: '/services/private-party' },
-        { name: 'Group Booking', icon: '👥', desc: 'Special discounts for groups', link: '/services/group-booking' }
+        { name: 'Group Booking', icon: '👥', desc: 'Special discounts for groups', link: '/services/group-booking' },
+        { name: 'Corporate Events', icon: '💼', desc: 'Professional event management', link: '/services/corporate' }
       ]
     },
     {
@@ -91,7 +95,8 @@ const Header = () => {
       bgColor: '#e0e7ff',
       subtypes: [
         { name: 'Live Music Nights', icon: '🎸', desc: 'Live band performances', link: '/services/live-music' },
-        { name: 'DJ Arrangements', icon: '🪩', desc: 'Professional DJ setups', link: '/services/dj' }
+        { name: 'DJ Arrangements', icon: '🪩', desc: 'Professional DJ setups', link: '/services/dj' },
+        { name: 'Club Events', icon: '💃', desc: 'Themed club nights', link: '/services/club' }
       ]
     },
     {
@@ -102,12 +107,13 @@ const Header = () => {
       bgColor: '#dcfce7',
       subtypes: [
         { name: 'Family Dining', icon: '🍽️', desc: 'Cozy family atmosphere', link: '/services/family-dining' },
-        { name: 'Coffee & Dessert Specials', icon: '🍰', desc: 'Exclusive combo offers', link: '/services/coffee-specials' }
+        { name: 'Coffee & Dessert Specials', icon: '🍰', desc: 'Exclusive combo offers', link: '/services/coffee-specials' },
+        { name: 'Fine Dining', icon: '🍷', desc: 'Premium dining experience', link: '/services/fine-dining' }
       ]
     }
   ];
 
-  // Menu Data
+  // Menu Data - Compact with all items
   const menuData = [
     { id: 1, name: '☕ Hot Coffees', icon: '☕', color: '#78350f', bgColor: '#fef3c7', filterId: 'coffee' },
     { id: 2, name: '🧊 Cold Coffees', icon: '🧊', color: '#3b82f6', bgColor: '#dbeafe', filterId: 'cold' },
@@ -205,101 +211,114 @@ const Header = () => {
       border: 'none',
       fontFamily: 'inherit',
     },
-    // Services Dropdown
-    servicesDropdown: {
+    // Level 1 Dropdown
+    level1Dropdown: {
       position: 'absolute',
       top: '45px',
       left: '0',
-      width: '320px',
+      width: '260px',
       background: 'white',
       borderRadius: '12px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       zIndex: 100,
+      opacity: 0,
+      visibility: 'hidden',
+      transform: 'translateY(-15px)',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '1px solid rgba(180, 83, 9, 0.1)',
       overflow: 'hidden',
-      maxHeight: '500px',
+      maxHeight: '450px',
       overflowY: 'auto',
     },
-    // Service Category
-    serviceCategory: {
-      borderBottom: '1px solid #f0f0f0',
+    level1DropdownVisible: {
+      opacity: 1,
+      visibility: 'visible',
+      transform: 'translateY(0)',
     },
-    serviceCategoryHeader: {
+    dropdownItem: {
       padding: '12px 16px',
       display: 'flex',
       alignItems: 'center',
       gap: '10px',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-      width: '100%',
-      background: 'none',
-      border: 'none',
-      textAlign: 'left',
+      borderBottom: '1px solid #f5f5f5',
+      position: 'relative',
     },
-    serviceCategoryIcon: {
+    dropdownItemIcon: {
       fontSize: '20px',
       width: '32px',
     },
-    serviceCategoryName: {
+    dropdownItemContent: {
       flex: 1,
+    },
+    dropdownItemName: {
       fontWeight: '600',
       fontSize: '13px',
       color: '#374151',
+      marginBottom: '2px',
     },
-    serviceCategoryArrow: {
+    dropdownItemDesc: {
+      fontSize: '10px',
+      color: '#9ca3af',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    },
+    dropdownArrow: {
       fontSize: '12px',
       color: '#9ca3af',
-      transition: 'transform 0.2s ease',
     },
-    // Service Subtypes
-    serviceSubtypes: {
-      display: 'none',
-      background: '#fafafa',
+    // Level 2 Dropdown (Services Subtypes)
+    level2Dropdown: {
+      position: 'absolute',
+      top: '0',
+      left: '100%',
+      width: '280px',
+      background: 'white',
+      borderRadius: '12px',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+      border: '1px solid rgba(180, 83, 9, 0.1)',
+      opacity: 0,
+      visibility: 'hidden',
+      transform: 'translateX(-10px)',
+      transition: 'all 0.25s ease',
+      zIndex: 101,
+      maxHeight: '400px',
+      overflowY: 'auto',
     },
-    serviceSubtypesOpen: {
-      display: 'block',
+    level2DropdownVisible: {
+      opacity: 1,
+      visibility: 'visible',
+      transform: 'translateX(0)',
     },
-    serviceSubtypeItem: {
-      padding: '10px 16px 10px 48px',
+    level2Item: {
+      padding: '10px 14px',
       display: 'flex',
       alignItems: 'center',
       gap: '10px',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-      borderTop: '1px solid #f5f5f5',
+      borderBottom: '1px solid #f5f5f5',
     },
-    serviceSubtypeIcon: {
-      fontSize: '16px',
-      width: '28px',
+    level2ItemIcon: {
+      fontSize: '18px',
+      width: '30px',
     },
-    serviceSubtypeContent: {
+    level2ItemContent: {
       flex: 1,
     },
-    serviceSubtypeName: {
-      fontSize: '12px',
+    level2ItemName: {
       fontWeight: '500',
+      fontSize: '12px',
       color: '#374151',
     },
-    serviceSubtypeDesc: {
+    level2ItemDesc: {
       fontSize: '10px',
       color: '#9ca3af',
     },
-    // Menu Dropdown
-    menuDropdown: {
-      position: 'absolute',
-      top: '45px',
-      left: '0',
-      width: '240px',
-      background: 'white',
-      borderRadius: '12px',
-      boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-      zIndex: 100,
-      border: '1px solid rgba(180, 83, 9, 0.1)',
-      overflow: 'hidden',
-      maxHeight: '450px',
-      overflowY: 'auto',
-    },
-    menuItem: {
+    // Menu Items (Compact)
+    menuItemCompact: {
       padding: '10px 16px',
       display: 'flex',
       alignItems: 'center',
@@ -392,18 +411,12 @@ const Header = () => {
       paddingLeft: '16px',
       maxHeight: '0',
       overflow: 'hidden',
-      transition: 'maxHeight 0.3s ease',
+      transition: 'max-height 0.3s ease',
     },
     mobileSubItemsOpen: {
       maxHeight: '500px',
     },
-    mobileServiceCategory: {
-      marginBottom: '5px',
-    },
-    mobileServiceSubtypes: {
-      paddingLeft: '40px',
-    },
-    mobileServiceSubtype: {
+    mobileServiceItem: {
       padding: '10px 12px',
       borderRadius: '8px',
       marginBottom: '5px',
@@ -425,24 +438,11 @@ const Header = () => {
       cursor: 'pointer',
       marginTop: '20px',
     },
-  };
-
-  // Handle service category click
-  const handleServiceCategoryClick = (categoryId) => {
-    if (openServiceCategory === categoryId) {
-      setOpenServiceCategory(null);
-    } else {
-      setOpenServiceCategory(categoryId);
-    }
-  };
-
-  // Handle mobile service category click
-  const handleMobileServiceCategoryClick = (categoryId) => {
-    if (mobileOpenServiceCategory === categoryId) {
-      setMobileOpenServiceCategory(null);
-    } else {
-      setMobileOpenServiceCategory(categoryId);
-    }
+    // Scrollbar styles
+    scrollbar: {
+      scrollbarWidth: 'thin',
+      scrollbarColor: '#f59e0b #fef3c7',
+    },
   };
 
   return (
@@ -463,75 +463,83 @@ const Header = () => {
               <div 
                 key={item.name} 
                 style={styles.navItem}
-                className={item.type === 'menu' ? 'menu-dropdown' : (item.type === 'services' ? 'services-dropdown' : '')}
+                onMouseEnter={() => {
+                  if (item.hasDropdown && item.type === 'services') {
+                    setIsServicesDropdownOpen(true);
+                    setActiveService(null);
+                  }
+                  if (item.hasDropdown && item.type === 'menu') {
+                    setIsMenuDropdownOpen(true);
+                    setActiveMenuItem(null);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (item.type === 'services') {
+                    setIsServicesDropdownOpen(false);
+                    setActiveService(null);
+                  }
+                  if (item.type === 'menu') {
+                    setIsMenuDropdownOpen(false);
+                    setActiveMenuItem(null);
+                  }
+                }}
               >
                 {item.hasDropdown ? (
                   <>
-                    <button 
-                      style={styles.navLink}
-                      onClick={() => {
-                        if (item.type === 'services') {
-                          setIsServicesDropdownOpen(!isServicesDropdownOpen);
-                          if (!isServicesDropdownOpen) setOpenServiceCategory(null);
-                        } else if (item.type === 'menu') {
-                          setIsMenuDropdownOpen(!isMenuDropdownOpen);
-                        }
-                      }}
-                    >
+                    <button style={styles.navLink}>
                       <span>{item.icon}</span>
                       <span>{item.name}</span>
                     </button>
 
                     {/* Services Dropdown */}
-                    {item.type === 'services' && isServicesDropdownOpen && (
-                      <div style={styles.servicesDropdown}>
+                    {item.type === 'services' && (
+                      <div style={{...styles.level1Dropdown, ...(isServicesDropdownOpen ? styles.level1DropdownVisible : {})}}>
                         {servicesData.map((service) => (
-                          <div key={service.id} style={styles.serviceCategory}>
-                            <button 
-                              style={styles.serviceCategoryHeader}
-                              onClick={() => handleServiceCategoryClick(service.id)}
-                              onMouseEnter={(e) => e.currentTarget.style.background = service.bgColor}
-                              onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
-                            >
-                              <span style={styles.serviceCategoryIcon}>{service.icon}</span>
-                              <span style={styles.serviceCategoryName}>{service.name}</span>
-                              <span style={{
-                                ...styles.serviceCategoryArrow,
-                                transform: openServiceCategory === service.id ? 'rotate(180deg)' : 'rotate(0deg)'
-                              }}>▼</span>
-                            </button>
-                            <div style={{
-                              ...styles.serviceSubtypes,
-                              ...(openServiceCategory === service.id ? styles.serviceSubtypesOpen : {})
-                            }}>
-                              {service.subtypes.map((sub, idx) => (
-                                <div
-                                  key={idx}
-                                  style={styles.serviceSubtypeItem}
-                                  onClick={() => navigateTo(sub.link)}
-                                  onMouseEnter={(e) => e.currentTarget.style.background = '#f0f0f0'}
-                                  onMouseLeave={(e) => e.currentTarget.style.background = '#fafafa'}
-                                >
-                                  <span style={styles.serviceSubtypeIcon}>{sub.icon}</span>
-                                  <div style={styles.serviceSubtypeContent}>
-                                    <div style={styles.serviceSubtypeName}>{sub.name}</div>
-                                    <div style={styles.serviceSubtypeDesc}>{sub.desc}</div>
-                                  </div>
-                                </div>
-                              ))}
+                          <div
+                            key={service.id}
+                            style={styles.dropdownItem}
+                            onMouseEnter={() => setActiveService(service.id)}
+                            onMouseLeave={() => setActiveService(null)}
+                          >
+                            <span style={styles.dropdownItemIcon}>{service.icon}</span>
+                            <div style={styles.dropdownItemContent}>
+                              <div style={styles.dropdownItemName}>{service.name}</div>
+                              <div style={styles.dropdownItemDesc}>{service.subtypes.length} options</div>
                             </div>
+                            <span style={styles.dropdownArrow}>→</span>
+
+                            {/* Services Subtypes Dropdown */}
+                            {activeService === service.id && (
+                              <div style={{...styles.level2Dropdown, ...styles.level2DropdownVisible}}>
+                                {service.subtypes.map((sub, idx) => (
+                                  <div
+                                    key={idx}
+                                    style={styles.level2Item}
+                                    onClick={() => navigateTo(sub.link)}
+                                    onMouseEnter={(e) => e.currentTarget.style.background = service.bgColor}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
+                                  >
+                                    <span style={styles.level2ItemIcon}>{sub.icon}</span>
+                                    <div style={styles.level2ItemContent}>
+                                      <div style={styles.level2ItemName}>{sub.name}</div>
+                                      <div style={styles.level2ItemDesc}>{sub.desc}</div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
                     )}
 
-                    {/* Menu Dropdown */}
-                    {item.type === 'menu' && isMenuDropdownOpen && (
-                      <div style={styles.menuDropdown}>
+                    {/* Menu Dropdown - Compact with all items */}
+                    {item.type === 'menu' && (
+                      <div style={{...styles.level1Dropdown, ...(isMenuDropdownOpen ? styles.level1DropdownVisible : {}), width: '240px'}}>
                         {menuData.map((menuItem) => (
                           <div
                             key={menuItem.id}
-                            style={styles.menuItem}
+                            style={styles.menuItemCompact}
                             onClick={() => navigateToWithFilter(menuItem.filterId)}
                             onMouseEnter={(e) => e.currentTarget.style.background = menuItem.bgColor}
                             onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
@@ -568,7 +576,6 @@ const Header = () => {
                     if (item.type === 'services') {
                       setIsMobileServicesDropdownOpen(!isMobileServicesDropdownOpen);
                       setIsMobileMenuDropdownOpen(false);
-                      if (!isMobileServicesDropdownOpen) setMobileOpenServiceCategory(null);
                     } else if (item.type === 'menu') {
                       setIsMobileMenuDropdownOpen(!isMobileMenuDropdownOpen);
                       setIsMobileServicesDropdownOpen(false);
@@ -580,22 +587,22 @@ const Header = () => {
                 </button>
 
                 {/* Mobile Services */}
-                {item.type === 'services' && isMobileServicesDropdownOpen && (
-                  <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
+                {item.type === 'services' && (
+                  <div style={{...styles.mobileSubItems, ...(isMobileServicesDropdownOpen ? styles.mobileSubItemsOpen : {})}}>
                     {servicesData.map((service) => (
-                      <div key={service.id} style={styles.mobileServiceCategory}>
+                      <div key={service.id}>
                         <button
                           style={{...styles.mobileDropdownBtn, background: service.bgColor, marginBottom: '5px', fontSize: '14px', padding: '10px 12px'}}
-                          onClick={() => handleMobileServiceCategoryClick(service.id)}
+                          onClick={() => setMobileActiveService(mobileActiveService === service.id ? null : service.id)}
                         >
                           <span><span>{service.icon}</span> {service.name}</span>
-                          <span>{mobileOpenServiceCategory === service.id ? '▲' : '▼'}</span>
+                          <span>{mobileActiveService === service.id ? '▲' : '▼'}</span>
                         </button>
-                        <div style={{...styles.mobileSubItems, ...(mobileOpenServiceCategory === service.id ? styles.mobileSubItemsOpen : {}), paddingLeft: '30px'}}>
+                        <div style={{...styles.mobileSubItems, ...(mobileActiveService === service.id ? styles.mobileSubItemsOpen : {})}}>
                           {service.subtypes.map((sub, idx) => (
                             <div
                               key={idx}
-                              style={{...styles.mobileServiceSubtype, background: '#f9fafb'}}
+                              style={{...styles.mobileServiceItem, background: '#f9fafb'}}
                               onClick={() => navigateTo(sub.link)}
                             >
                               <div><span>{sub.icon}</span> {sub.name}</div>
@@ -608,9 +615,9 @@ const Header = () => {
                   </div>
                 )}
 
-                {/* Mobile Menu */}
-                {item.type === 'menu' && isMobileMenuDropdownOpen && (
-                  <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
+                {/* Mobile Menu - Compact */}
+                {item.type === 'menu' && (
+                  <div style={{...styles.mobileSubItems, ...(isMobileMenuDropdownOpen ? styles.mobileSubItemsOpen : {})}}>
                     {menuData.map((menuItem) => (
                       <div
                         key={menuItem.id}
@@ -637,13 +644,20 @@ const Header = () => {
 
       <style>
         {`
+          /* Custom scrollbar for dropdowns */
+          .services-dropdown::-webkit-scrollbar,
+          .menu-dropdown::-webkit-scrollbar,
           div[style*="overflowY: auto"]::-webkit-scrollbar {
             width: 5px;
           }
+          .services-dropdown::-webkit-scrollbar-track,
+          .menu-dropdown::-webkit-scrollbar-track,
           div[style*="overflowY: auto"]::-webkit-scrollbar-track {
             background: #fef3c7;
             border-radius: 10px;
           }
+          .services-dropdown::-webkit-scrollbar-thumb,
+          .menu-dropdown::-webkit-scrollbar-thumb,
           div[style*="overflowY: auto"]::-webkit-scrollbar-thumb {
             background: #f59e0b;
             border-radius: 10px;

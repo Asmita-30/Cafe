@@ -62,7 +62,7 @@ const Header = () => {
   const servicesData = [
     {
       id: 1,
-      name: '🎉 Family Celebrations',
+      name: 'Family Celebrations',
       icon: '🎉',
       color: '#f59e0b',
       bgColor: '#fef3c7',
@@ -74,7 +74,7 @@ const Header = () => {
     },
     {
       id: 2,
-      name: '🥳 Party Events',
+      name: 'Party Events',
       icon: '🥳',
       color: '#ec4899',
       bgColor: '#fce7f3',
@@ -85,7 +85,7 @@ const Header = () => {
     },
     {
       id: 3,
-      name: '🎧 DJ & Club',
+      name: 'DJ & Club',
       icon: '🎧',
       color: '#4f46e5',
       bgColor: '#e0e7ff',
@@ -96,7 +96,7 @@ const Header = () => {
     },
     {
       id: 4,
-      name: '☕ Dining',
+      name: 'Dining',
       icon: '☕',
       color: '#22c55e',
       bgColor: '#dcfce7',
@@ -109,17 +109,17 @@ const Header = () => {
 
   // Menu Data
   const menuData = [
-    { id: 1, name: '☕ Hot Coffees', icon: '☕', color: '#78350f', bgColor: '#fef3c7', filterId: 'coffee' },
-    { id: 2, name: '🧊 Cold Coffees', icon: '🧊', color: '#3b82f6', bgColor: '#dbeafe', filterId: 'cold' },
-    { id: 3, name: '🍵 Teas & Chai', icon: '🍵', color: '#10b981', bgColor: '#d1fae5', filterId: 'tea' },
-    { id: 4, name: '🥐 Fresh Bakery', icon: '🥐', color: '#f59e0b', bgColor: '#fef3c7', filterId: 'bakery' },
-    { id: 5, name: '🍳 Breakfast', icon: '🍳', color: '#ef4444', bgColor: '#fee2e2', filterId: 'breakfast' },
-    { id: 6, name: '🍝 Lunch & Dinner', icon: '🍝', color: '#8b5cf6', bgColor: '#ede9fe', filterId: 'lunch' },
-    { id: 7, name: '🍰 Desserts', icon: '🍰', color: '#ec4899', bgColor: '#fce7f3', filterId: 'desserts' },
-    { id: 8, name: '🥤 Smoothies', icon: '🥤', color: '#06b6d4', bgColor: '#cffafe', filterId: 'smoothies' },
-    { id: 9, name: '✨ Signature Drinks', icon: '✨', color: '#f59e0b', bgColor: '#fef3c7', filterId: 'signature' },
-    { id: 10, name: '🥪 Sandwiches', icon: '🥪', color: '#84cc16', bgColor: '#ecfccb', filterId: 'sandwiches' },
-    { id: 11, name: '🥗 Salads', icon: '🥗', color: '#22c55e', bgColor: '#dcfce7', filterId: 'salads' }
+    { id: 1, name: 'Hot Coffees', icon: '☕', color: '#78350f', bgColor: '#fef3c7', filterId: 'coffee' },
+    { id: 2, name: 'Cold Coffees', icon: '🧊', color: '#3b82f6', bgColor: '#dbeafe', filterId: 'cold' },
+    { id: 3, name: 'Teas & Chai', icon: '🍵', color: '#10b981', bgColor: '#d1fae5', filterId: 'tea' },
+    { id: 4, name: 'Fresh Bakery', icon: '🥐', color: '#f59e0b', bgColor: '#fef3c7', filterId: 'bakery' },
+    { id: 5, name: 'Breakfast', icon: '🍳', color: '#ef4444', bgColor: '#fee2e2', filterId: 'breakfast' },
+    { id: 6, name: 'Lunch & Dinner', icon: '🍝', color: '#8b5cf6', bgColor: '#ede9fe', filterId: 'lunch' },
+    { id: 7, name: 'Desserts', icon: '🍰', color: '#ec4899', bgColor: '#fce7f3', filterId: 'desserts' },
+    { id: 8, name: 'Smoothies', icon: '🥤', color: '#06b6d4', bgColor: '#cffafe', filterId: 'smoothies' },
+    { id: 9, name: 'Signature Drinks', icon: '✨', color: '#f59e0b', bgColor: '#fef3c7', filterId: 'signature' },
+    { id: 10, name: 'Sandwiches', icon: '🥪', color: '#84cc16', bgColor: '#ecfccb', filterId: 'sandwiches' },
+    { id: 11, name: 'Salads', icon: '🥗', color: '#22c55e', bgColor: '#dcfce7', filterId: 'salads' }
   ];
 
   const navItems = [
@@ -138,10 +138,10 @@ const Header = () => {
       left: 0,
       width: '100%',
       zIndex: 1000,
-      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
       backdropFilter: 'blur(10px)',
-      boxShadow: isScrolled ? '0 4px 30px rgba(0,0,0,0.1)' : '0 2px 20px rgba(0,0,0,0.05)',
+      boxShadow: isScrolled ? '0 4px 30px rgba(0,0,0,0.08)' : '0 2px 20px rgba(0,0,0,0.05)',
       padding: isScrolled ? '8px 0' : '15px 0',
     },
     container: {
@@ -155,12 +155,12 @@ const Header = () => {
     logoContainer: {
       display: 'flex',
       alignItems: 'center',
-      gap: '15px',
+      gap: '12px',
       textDecoration: 'none',
       cursor: 'pointer',
     },
     logo: {
-      height: isScrolled ? '50px' : '65px',
+      height: isScrolled ? '45px' : '55px',
       width: 'auto',
       objectFit: 'contain',
       transition: 'height 0.3s ease',
@@ -170,7 +170,7 @@ const Header = () => {
       flexDirection: 'column',
     },
     logoTitle: {
-      fontSize: isScrolled ? '22px' : '28px',
+      fontSize: isScrolled ? '20px' : '24px',
       fontWeight: 'bold',
       background: 'linear-gradient(135deg, #78350f, #b45309, #f59e0b)',
       WebkitBackgroundClip: 'text',
@@ -178,14 +178,14 @@ const Header = () => {
       margin: 0,
     },
     logoSlogan: {
-      fontSize: '10px',
+      fontSize: '8px',
       color: '#b45309',
-      letterSpacing: '3px',
+      letterSpacing: '2px',
       margin: 0,
     },
     desktopNav: {
       display: isMobile ? 'none' : 'flex',
-      gap: '35px',
+      gap: '30px',
       alignItems: 'center',
     },
     navItem: {
@@ -195,7 +195,7 @@ const Header = () => {
       textDecoration: 'none',
       color: isScrolled ? '#374151' : '#78350f',
       fontWeight: '600',
-      fontSize: '15px',
+      fontSize: '14px',
       padding: '8px 0',
       display: 'flex',
       alignItems: 'center',
@@ -204,23 +204,23 @@ const Header = () => {
       background: 'none',
       border: 'none',
       fontFamily: 'inherit',
+      transition: 'color 0.2s ease',
     },
     // Services Dropdown
     servicesDropdown: {
       position: 'absolute',
-      top: '45px',
+      top: '40px',
       left: '0',
-      width: '320px',
+      width: '300px',
       background: 'white',
-      borderRadius: '12px',
+      borderRadius: '16px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       zIndex: 100,
-      border: '1px solid rgba(180, 83, 9, 0.1)',
+      border: '1px solid rgba(245,158,11,0.2)',
       overflow: 'hidden',
-      maxHeight: '500px',
+      maxHeight: '460px',
       overflowY: 'auto',
     },
-    // Service Category
     serviceCategory: {
       borderBottom: '1px solid #f0f0f0',
     },
@@ -235,10 +235,13 @@ const Header = () => {
       background: 'none',
       border: 'none',
       textAlign: 'left',
+      fontWeight: '500',
+      fontSize: '13px',
+      color: '#374151',
     },
     serviceCategoryIcon: {
-      fontSize: '20px',
-      width: '32px',
+      fontSize: '18px',
+      width: '28px',
     },
     serviceCategoryName: {
       flex: 1,
@@ -247,11 +250,10 @@ const Header = () => {
       color: '#374151',
     },
     serviceCategoryArrow: {
-      fontSize: '12px',
+      fontSize: '10px',
       color: '#9ca3af',
       transition: 'transform 0.2s ease',
     },
-    // Service Subtypes
     serviceSubtypes: {
       display: 'none',
       background: '#fafafa',
@@ -266,11 +268,11 @@ const Header = () => {
       gap: '10px',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-      borderTop: '1px solid #f5f5f5',
+      borderTop: '1px solid #f0f0f0',
     },
     serviceSubtypeIcon: {
-      fontSize: '16px',
-      width: '28px',
+      fontSize: '14px',
+      width: '24px',
     },
     serviceSubtypeContent: {
       flex: 1,
@@ -287,16 +289,16 @@ const Header = () => {
     // Menu Dropdown
     menuDropdown: {
       position: 'absolute',
-      top: '45px',
+      top: '40px',
       left: '0',
-      width: '240px',
+      width: '220px',
       background: 'white',
-      borderRadius: '12px',
+      borderRadius: '16px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       zIndex: 100,
-      border: '1px solid rgba(180, 83, 9, 0.1)',
+      border: '1px solid rgba(245,158,11,0.2)',
       overflow: 'hidden',
-      maxHeight: '450px',
+      maxHeight: '420px',
       overflowY: 'auto',
     },
     menuItem: {
@@ -306,11 +308,11 @@ const Header = () => {
       gap: '10px',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-      borderBottom: '1px solid #f5f5f5',
+      borderBottom: '1px solid #f0f0f0',
     },
     menuItemIcon: {
-      fontSize: '18px',
-      width: '30px',
+      fontSize: '16px',
+      width: '28px',
     },
     menuItemName: {
       fontSize: '13px',
@@ -318,27 +320,29 @@ const Header = () => {
       color: '#374151',
     },
     orderButton: {
-      padding: '8px 24px',
+      padding: '8px 22px',
       background: 'linear-gradient(135deg, #f59e0b, #d97706)',
       color: 'white',
       border: 'none',
-      borderRadius: '50px',
-      fontWeight: 'bold',
-      fontSize: '14px',
+      borderRadius: '40px',
+      fontWeight: '600',
+      fontSize: '13px',
       cursor: 'pointer',
       display: 'flex',
       alignItems: 'center',
       gap: '6px',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 2px 8px rgba(245,158,11,0.3)',
     },
     mobileButton: {
       display: isMobile ? 'block' : 'none',
       background: '#fef3c7',
       border: 'none',
-      padding: '10px 14px',
+      padding: '8px 12px',
       borderRadius: '10px',
       cursor: 'pointer',
       color: '#78350f',
-      fontSize: '22px',
+      fontSize: '20px',
     },
     overlay: {
       position: 'fixed',
@@ -354,25 +358,25 @@ const Header = () => {
       position: 'fixed',
       top: 0,
       right: 0,
-      width: '320px',
+      width: '300px',
       height: '100%',
       background: 'white',
       zIndex: 1000,
       transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
-      transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-      padding: '80px 20px 30px',
+      transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      padding: '70px 20px 30px',
       overflowY: 'auto',
     },
     mobileNavLink: {
       display: 'flex',
       alignItems: 'center',
-      gap: '12px',
-      padding: '12px 16px',
+      gap: '10px',
+      padding: '12px 14px',
       textDecoration: 'none',
       color: '#374151',
       fontWeight: '600',
       borderRadius: '10px',
-      fontSize: '15px',
+      fontSize: '14px',
     },
     mobileDropdownBtn: {
       display: 'flex',
@@ -381,8 +385,8 @@ const Header = () => {
       width: '100%',
       background: 'none',
       border: 'none',
-      padding: '12px 16px',
-      fontSize: '15px',
+      padding: '12px 14px',
+      fontSize: '14px',
       fontWeight: '600',
       color: '#374151',
       cursor: 'pointer',
@@ -401,7 +405,7 @@ const Header = () => {
       marginBottom: '5px',
     },
     mobileServiceSubtypes: {
-      paddingLeft: '40px',
+      paddingLeft: '35px',
     },
     mobileServiceSubtype: {
       padding: '10px 12px',
@@ -419,30 +423,20 @@ const Header = () => {
       background: 'linear-gradient(135deg, #f59e0b, #d97706)',
       color: 'white',
       border: 'none',
-      borderRadius: '50px',
-      fontWeight: 'bold',
-      fontSize: '15px',
+      borderRadius: '40px',
+      fontWeight: '600',
+      fontSize: '14px',
       cursor: 'pointer',
       marginTop: '20px',
     },
   };
 
-  // Handle service category click
   const handleServiceCategoryClick = (categoryId) => {
-    if (openServiceCategory === categoryId) {
-      setOpenServiceCategory(null);
-    } else {
-      setOpenServiceCategory(categoryId);
-    }
+    setOpenServiceCategory(openServiceCategory === categoryId ? null : categoryId);
   };
 
-  // Handle mobile service category click
   const handleMobileServiceCategoryClick = (categoryId) => {
-    if (mobileOpenServiceCategory === categoryId) {
-      setMobileOpenServiceCategory(null);
-    } else {
-      setMobileOpenServiceCategory(categoryId);
-    }
+    setMobileOpenServiceCategory(mobileOpenServiceCategory === categoryId ? null : categoryId);
   };
 
   return (
@@ -450,20 +444,18 @@ const Header = () => {
       <header style={styles.header}>
         <div style={styles.container}>
           <a href="/" style={styles.logoContainer}>
-            <img src={logo} alt="Café Aura Logo" style={styles.logo} />
+            <img src={logo} alt="Café Aura" style={styles.logo} />
             <div style={styles.logoText}>
               <h1 style={styles.logoTitle}>Café Aura</h1>
               <p style={styles.logoSlogan}>SIP • RELAX • REPEAT</p>
             </div>
           </a>
 
-          {/* Desktop Navigation */}
           <nav style={styles.desktopNav}>
             {navItems.map((item) => (
               <div 
                 key={item.name} 
                 style={styles.navItem}
-                className={item.type === 'menu' ? 'menu-dropdown' : (item.type === 'services' ? 'services-dropdown' : '')}
               >
                 {item.hasDropdown ? (
                   <>
@@ -482,7 +474,6 @@ const Header = () => {
                       <span>{item.name}</span>
                     </button>
 
-                    {/* Services Dropdown */}
                     {item.type === 'services' && isServicesDropdownOpen && (
                       <div style={styles.servicesDropdown}>
                         {servicesData.map((service) => (
@@ -509,7 +500,7 @@ const Header = () => {
                                   key={idx}
                                   style={styles.serviceSubtypeItem}
                                   onClick={() => navigateTo(sub.link)}
-                                  onMouseEnter={(e) => e.currentTarget.style.background = '#f0f0f0'}
+                                  onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f5'}
                                   onMouseLeave={(e) => e.currentTarget.style.background = '#fafafa'}
                                 >
                                   <span style={styles.serviceSubtypeIcon}>{sub.icon}</span>
@@ -525,7 +516,6 @@ const Header = () => {
                       </div>
                     )}
 
-                    {/* Menu Dropdown */}
                     {item.type === 'menu' && isMenuDropdownOpen && (
                       <div style={styles.menuDropdown}>
                         {menuData.map((menuItem) => (
@@ -555,7 +545,6 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Overlay & Menu */}
       <div style={styles.overlay} onClick={() => setIsMobileMenuOpen(false)}></div>
       <div style={styles.mobileMenu}>
         {navItems.map((item) => (
@@ -568,7 +557,6 @@ const Header = () => {
                     if (item.type === 'services') {
                       setIsMobileServicesDropdownOpen(!isMobileServicesDropdownOpen);
                       setIsMobileMenuDropdownOpen(false);
-                      if (!isMobileServicesDropdownOpen) setMobileOpenServiceCategory(null);
                     } else if (item.type === 'menu') {
                       setIsMobileMenuDropdownOpen(!isMobileMenuDropdownOpen);
                       setIsMobileServicesDropdownOpen(false);
@@ -579,13 +567,12 @@ const Header = () => {
                   <span>{isMobileServicesDropdownOpen || isMobileMenuDropdownOpen ? '▲' : '▼'}</span>
                 </button>
 
-                {/* Mobile Services */}
                 {item.type === 'services' && isMobileServicesDropdownOpen && (
                   <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
                     {servicesData.map((service) => (
                       <div key={service.id} style={styles.mobileServiceCategory}>
                         <button
-                          style={{...styles.mobileDropdownBtn, background: service.bgColor, marginBottom: '5px', fontSize: '14px', padding: '10px 12px'}}
+                          style={{...styles.mobileDropdownBtn, background: service.bgColor, marginBottom: '5px', fontSize: '13px', padding: '10px 12px'}}
                           onClick={() => handleMobileServiceCategoryClick(service.id)}
                         >
                           <span><span>{service.icon}</span> {service.name}</span>
@@ -599,7 +586,7 @@ const Header = () => {
                               onClick={() => navigateTo(sub.link)}
                             >
                               <div><span>{sub.icon}</span> {sub.name}</div>
-                              <div style={{fontSize: '11px', color: '#6b7280', marginTop: '3px'}}>{sub.desc}</div>
+                              <div style={{fontSize: '10px', color: '#6b7280', marginTop: '2px'}}>{sub.desc}</div>
                             </div>
                           ))}
                         </div>
@@ -608,7 +595,6 @@ const Header = () => {
                   </div>
                 )}
 
-                {/* Mobile Menu */}
                 {item.type === 'menu' && isMobileMenuDropdownOpen && (
                   <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
                     {menuData.map((menuItem) => (
@@ -638,7 +624,7 @@ const Header = () => {
       <style>
         {`
           div[style*="overflowY: auto"]::-webkit-scrollbar {
-            width: 5px;
+            width: 4px;
           }
           div[style*="overflowY: auto"]::-webkit-scrollbar-track {
             background: #fef3c7;
@@ -647,6 +633,9 @@ const Header = () => {
           div[style*="overflowY: auto"]::-webkit-scrollbar-thumb {
             background: #f59e0b;
             border-radius: 10px;
+          }
+          button, a {
+            transition: all 0.2s ease;
           }
         `}
       </style>

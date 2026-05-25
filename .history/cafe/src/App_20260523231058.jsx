@@ -8,17 +8,6 @@ import Menu from './page/menu';
 import Contact from './page/contact';
 import Order from './page/order';
 
-// Import Service Pages
-import Birthday from './services/birthday';
-import Anniversary from './services/anniversary';
-import FamilyGathering from './services/family-gathering';
-import PrivateParty from './services/private-party';
-import GroupBooking from './services/group-booking';
-import LiveMusic from './services/live-music';
-import DJArrangements from './services/dj';
-import FamilyDining from './services/family-dining';
-import CoffeeSpecials from './services/coffee-specials';
-
 function App() {
   const [currentPath, setCurrentPath] = React.useState(window.location.pathname);
 
@@ -50,7 +39,6 @@ function App() {
 
   const renderPage = () => {
     switch(currentPath) {
-      // Main Pages
       case '/':
       case '/home':
         return <Home />;
@@ -62,34 +50,6 @@ function App() {
         return <Contact />;
       case '/order':
         return <Order />;
-      
-      // Service Pages - Family Celebrations
-      case '/services/birthday':
-        return <Birthday />;
-      case '/services/anniversary':
-        return <Anniversary />;
-      case '/services/family-gathering':
-        return <FamilyGathering />;
-      
-      // Service Pages - Party Events
-      case '/services/private-party':
-        return <PrivateParty />;
-      case '/services/group-booking':
-        return <GroupBooking />;
-      
-      // Service Pages - DJ & Club
-      case '/services/live-music':
-        return <LiveMusic />;
-      case '/services/dj':
-        return <DJArrangements />;
-      
-      // Service Pages - Dining
-      case '/services/family-dining':
-        return <FamilyDining />;
-      case '/services/coffee-specials':
-        return <CoffeeSpecials />;
-      
-      // Default
       default:
         return <Home />;
     }
@@ -100,7 +60,7 @@ function App() {
       <Header />
       <main style={{ 
         minHeight: '100vh',
-        paddingTop: '80px',
+        paddingTop: '80px', // This ensures content starts below the fixed header
       }}>
         {renderPage()}
       </main>

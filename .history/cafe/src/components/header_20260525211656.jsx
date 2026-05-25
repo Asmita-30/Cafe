@@ -9,9 +9,11 @@ const Header = () => {
   const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [openServiceCategory, setOpenServiceCategory] = useState(null);
+  const [activeMenuItem, setActiveMenuItem] = useState(null);
   const [isMobileMenuDropdownOpen, setIsMobileMenuDropdownOpen] = useState(false);
   const [isMobileServicesDropdownOpen, setIsMobileServicesDropdownOpen] = useState(false);
   const [mobileOpenServiceCategory, setMobileOpenServiceCategory] = useState(null);
+  const [mobileActiveMenuItem, setMobileActiveMenuItem] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,7 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (isMenuDropdownOpen && !event.target.closest('.menu-dropdown')) {
         setIsMenuDropdownOpen(false);
+        setActiveMenuItem(null);
       }
       if (isServicesDropdownOpen && !event.target.closest('.services-dropdown')) {
         setIsServicesDropdownOpen(false);
@@ -58,7 +61,7 @@ const Header = () => {
     window.location.href = '/menu';
   };
 
-  // Services Data
+  // Services Data with nested structure - subtypes shown below each category
   const servicesData = [
     {
       id: 1,
@@ -80,7 +83,8 @@ const Header = () => {
       bgColor: '#fce7f3',
       subtypes: [
         { name: 'Private Parties', icon: '🎈', desc: 'Exclusive party arrangements', link: '/services/private-party' },
-        { name: 'Group Booking', icon: '👥', desc: 'Special discounts for groups', link: '/services/group-booking' }
+        { name: 'Group Booking', icon: '👥', desc: 'Special discounts for groups', link: '/services/group-booking' },
+        { name: 'Corporate Events', icon: '💼', desc: 'Professional event management', link: '/services/corporate' }
       ]
     },
     {
@@ -91,7 +95,8 @@ const Header = () => {
       bgColor: '#e0e7ff',
       subtypes: [
         { name: 'Live Music Nights', icon: '🎸', desc: 'Live band performances', link: '/services/live-music' },
-        { name: 'DJ Arrangements', icon: '🪩', desc: 'Professional DJ setups', link: '/services/dj' }
+        { name: 'DJ Arrangements', icon: '🪩', desc: 'Professional DJ setups', link: '/services/dj' },
+        { name: 'Club Events', icon: '💃', desc: 'Themed club nights', link: '/services/club' }
       ]
     },
     {
@@ -102,12 +107,13 @@ const Header = () => {
       bgColor: '#dcfce7',
       subtypes: [
         { name: 'Family Dining', icon: '🍽️', desc: 'Cozy family atmosphere', link: '/services/family-dining' },
-        { name: 'Coffee & Dessert Specials', icon: '🍰', desc: 'Exclusive combo offers', link: '/services/coffee-specials' }
+        { name: 'Coffee & Dessert Specials', icon: '🍰', desc: 'Exclusive combo offers', link: '/services/coffee-specials' },
+        { name: 'Fine Dining', icon: '🍷', desc: 'Premium dining experience', link: '/services/fine-dining' }
       ]
     }
   ];
 
-  // Menu Data
+  // Menu Data - Compact
   const menuData = [
     { id: 1, name: '☕ Hot Coffees', icon: '☕', color: '#78350f', bgColor: '#fef3c7', filterId: 'coffee' },
     { id: 2, name: '🧊 Cold Coffees', icon: '🧊', color: '#3b82f6', bgColor: '#dbeafe', filterId: 'cold' },
@@ -205,22 +211,31 @@ const Header = () => {
       border: 'none',
       fontFamily: 'inherit',
     },
-    // Services Dropdown
+    // Services Dropdown - Main container
     servicesDropdown: {
       position: 'absolute',
       top: '45px',
       left: '0',
-      width: '320px',
+      width: '300px',
       background: 'white',
       borderRadius: '12px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       zIndex: 100,
+      opacity: 0,
+      visibility: 'hidden',
+      transform: 'translateY(-15px)',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '1px solid rgba(180, 83, 9, 0.1)',
       overflow: 'hidden',
       maxHeight: '500px',
       overflowY: 'auto',
     },
-    // Service Category
+    servicesDropdownVisible: {
+      opacity: 1,
+      visibility: 'visible',
+      transform: 'translateY(0)',
+    },
+    // Service Category Item
     serviceCategory: {
       borderBottom: '1px solid #f0f0f0',
     },
@@ -231,10 +246,6 @@ const Header = () => {
       gap: '10px',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-      width: '100%',
-      background: 'none',
-      border: 'none',
-      textAlign: 'left',
     },
     serviceCategoryIcon: {
       fontSize: '20px',
@@ -251,13 +262,18 @@ const Header = () => {
       color: '#9ca3af',
       transition: 'transform 0.2s ease',
     },
-    // Service Subtypes
+    serviceCategoryArrowOpen: {
+      transform: 'rotate(180deg)',
+    },
+    // Service Subtypes (shown below the category when clicked/hovered)
     serviceSubtypes: {
-      display: 'none',
+      maxHeight: '0',
+      overflow: 'hidden',
+      transition: 'max-height 0.3s ease',
       background: '#fafafa',
     },
     serviceSubtypesOpen: {
-      display: 'block',
+      maxHeight: '300px',
     },
     serviceSubtypeItem: {
       padding: '10px 16px 10px 48px',
@@ -294,10 +310,19 @@ const Header = () => {
       borderRadius: '12px',
       boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
       zIndex: 100,
+      opacity: 0,
+      visibility: 'hidden',
+      transform: 'translateY(-15px)',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '1px solid rgba(180, 83, 9, 0.1)',
       overflow: 'hidden',
       maxHeight: '450px',
       overflowY: 'auto',
+    },
+    menuDropdownVisible: {
+      opacity: 1,
+      visibility: 'visible',
+      transform: 'translateY(0)',
     },
     menuItem: {
       padding: '10px 16px',
@@ -427,7 +452,7 @@ const Header = () => {
     },
   };
 
-  // Handle service category click
+  // Handle service category click (for desktop - click to open/close subtypes)
   const handleServiceCategoryClick = (categoryId) => {
     if (openServiceCategory === categoryId) {
       setOpenServiceCategory(null);
@@ -463,31 +488,37 @@ const Header = () => {
               <div 
                 key={item.name} 
                 style={styles.navItem}
-                className={item.type === 'menu' ? 'menu-dropdown' : (item.type === 'services' ? 'services-dropdown' : '')}
+                onMouseEnter={() => {
+                  if (item.hasDropdown && item.type === 'services') {
+                    setIsServicesDropdownOpen(true);
+                  }
+                  if (item.hasDropdown && item.type === 'menu') {
+                    setIsMenuDropdownOpen(true);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (item.type === 'services') {
+                    setIsServicesDropdownOpen(false);
+                    setOpenServiceCategory(null);
+                  }
+                  if (item.type === 'menu') {
+                    setIsMenuDropdownOpen(false);
+                  }
+                }}
               >
                 {item.hasDropdown ? (
                   <>
-                    <button 
-                      style={styles.navLink}
-                      onClick={() => {
-                        if (item.type === 'services') {
-                          setIsServicesDropdownOpen(!isServicesDropdownOpen);
-                          if (!isServicesDropdownOpen) setOpenServiceCategory(null);
-                        } else if (item.type === 'menu') {
-                          setIsMenuDropdownOpen(!isMenuDropdownOpen);
-                        }
-                      }}
-                    >
+                    <button style={styles.navLink}>
                       <span>{item.icon}</span>
                       <span>{item.name}</span>
                     </button>
 
                     {/* Services Dropdown */}
-                    {item.type === 'services' && isServicesDropdownOpen && (
-                      <div style={styles.servicesDropdown}>
+                    {item.type === 'services' && (
+                      <div style={{...styles.servicesDropdown, ...(isServicesDropdownOpen ? styles.servicesDropdownVisible : {})}}>
                         {servicesData.map((service) => (
                           <div key={service.id} style={styles.serviceCategory}>
-                            <button 
+                            <div 
                               style={styles.serviceCategoryHeader}
                               onClick={() => handleServiceCategoryClick(service.id)}
                               onMouseEnter={(e) => e.currentTarget.style.background = service.bgColor}
@@ -497,9 +528,9 @@ const Header = () => {
                               <span style={styles.serviceCategoryName}>{service.name}</span>
                               <span style={{
                                 ...styles.serviceCategoryArrow,
-                                transform: openServiceCategory === service.id ? 'rotate(180deg)' : 'rotate(0deg)'
+                                ...(openServiceCategory === service.id ? styles.serviceCategoryArrowOpen : {})
                               }}>▼</span>
-                            </button>
+                            </div>
                             <div style={{
                               ...styles.serviceSubtypes,
                               ...(openServiceCategory === service.id ? styles.serviceSubtypesOpen : {})
@@ -526,8 +557,8 @@ const Header = () => {
                     )}
 
                     {/* Menu Dropdown */}
-                    {item.type === 'menu' && isMenuDropdownOpen && (
-                      <div style={styles.menuDropdown}>
+                    {item.type === 'menu' && (
+                      <div style={{...styles.menuDropdown, ...(isMenuDropdownOpen ? styles.menuDropdownVisible : {})}}>
                         {menuData.map((menuItem) => (
                           <div
                             key={menuItem.id}
@@ -568,7 +599,6 @@ const Header = () => {
                     if (item.type === 'services') {
                       setIsMobileServicesDropdownOpen(!isMobileServicesDropdownOpen);
                       setIsMobileMenuDropdownOpen(false);
-                      if (!isMobileServicesDropdownOpen) setMobileOpenServiceCategory(null);
                     } else if (item.type === 'menu') {
                       setIsMobileMenuDropdownOpen(!isMobileMenuDropdownOpen);
                       setIsMobileServicesDropdownOpen(false);
@@ -580,8 +610,8 @@ const Header = () => {
                 </button>
 
                 {/* Mobile Services */}
-                {item.type === 'services' && isMobileServicesDropdownOpen && (
-                  <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
+                {item.type === 'services' && (
+                  <div style={{...styles.mobileSubItems, ...(isMobileServicesDropdownOpen ? styles.mobileSubItemsOpen : {})}}>
                     {servicesData.map((service) => (
                       <div key={service.id} style={styles.mobileServiceCategory}>
                         <button
@@ -609,8 +639,8 @@ const Header = () => {
                 )}
 
                 {/* Mobile Menu */}
-                {item.type === 'menu' && isMobileMenuDropdownOpen && (
-                  <div style={{...styles.mobileSubItems, ...styles.mobileSubItemsOpen}}>
+                {item.type === 'menu' && (
+                  <div style={{...styles.mobileSubItems, ...(isMobileMenuDropdownOpen ? styles.mobileSubItemsOpen : {})}}>
                     {menuData.map((menuItem) => (
                       <div
                         key={menuItem.id}
@@ -637,6 +667,7 @@ const Header = () => {
 
       <style>
         {`
+          /* Custom scrollbar */
           div[style*="overflowY: auto"]::-webkit-scrollbar {
             width: 5px;
           }
